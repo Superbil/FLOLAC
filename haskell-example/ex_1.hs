@@ -102,3 +102,9 @@ myLast (x : xs) = myLast xs
 double :: [a] -> [a]
 double [] = []
 double (x : xs) = [x] ++ [x] ++ double xs
+
+-- 7
+interleave :: [a] -> [a] -> [a]
+interleave [] [] = []
+interleave x y = [head x] ++ [head y] ++ interleave (tail x) (tail y)
+
