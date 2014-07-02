@@ -99,7 +99,7 @@ ex3 : ∀ {A B C : Set} → (A → B) → (B → C) → A → C
 ex3 f x y = x (f y)
 
 ex4 : ∀ {A B C : Set} → (A → B → C) → (A → B) → A → C
-ex4 f = {!!}
+ex4 f g x = f x (g x)
 
 -- It's of course helpful to know whether a
 -- list is [] or not.
