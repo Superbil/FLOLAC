@@ -172,7 +172,8 @@ headOk (x ∷ xs) p = x
 
 {- * Use headOk to extract the first component of ex1 -}
 
--- headex1 : ℕ
+headex1 : ℕ
+headex1 = headOk (1 ∷ 2 ∷ 3 ∷ []) tt
 
 {- * Can you apply headOk to []? How, or why not? -}
 
