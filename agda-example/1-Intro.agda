@@ -165,14 +165,14 @@ IsTrue true  = ⊤
 
 headOk : ∀ {A} → (xs : List A) →
             (IsTrue (not (null xs))) → A
-headOk xs p = {!!}
+headOk [] ()
+headOk (x ∷ xs) p = x
 
    --- ..... headOk [] (...) ...
 
 {- * Use headOk to extract the first component of ex1 -}
 
-headex1 : ℕ
-headex1 = {!!}
+-- headex1 : ℕ
 
 {- * Can you apply headOk to []? How, or why not? -}
 
