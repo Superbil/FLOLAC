@@ -16,7 +16,7 @@ module 1-Intro where
 -- Not all things are the same. This
 -- gives us something to care about.
 
--- Haskell: 
+-- Haskell:
 --   data Bool = False | True
 
 data Bool : Set where
@@ -29,7 +29,7 @@ data Bool : Set where
 not : Bool → Bool
 not false = true
 not true  = false
-  
+
   -- The type could also be written
   --   not : (b : Bool) → Bool
 
@@ -90,24 +90,25 @@ id x = x
 -- Type Theory class yesterday.
 
 ex2 : ∀ {A B C : Set} → (A → B → C) → B → A → C
-ex2 = {!!}
+ex2 f x y = f y x
 
     -- ∀ {A B C : τ} is an abbreviation of
     -- ∀ {A : τ} {B : τ} {C : τ}
 
 ex3 : ∀ {A B C : Set} → (A → B) → (B → C) → A → C
-ex3 = {!!}
+ex3 f x y = x (f y)
 
 ex4 : ∀ {A B C : Set} → (A → B → C) → (A → B) → A → C
-ex4 = {!!}
+ex4 f = {!!}
 
 -- It's of course helpful to know whether a
 -- list is [] or not.
 
 null : ∀ {A} → List A → Bool
-null xs = {!!}
+null [] = true
+null (x ∷ xs) = false
 
-   -- ∀ {A} is a shorter syntax for 
+   -- ∀ {A} is a shorter syntax for
    --  {A : τ} when τ can be inferred.
    -- ∀ A is a shorter synatx for
    --  (A : τ) when τ can be inferred.
@@ -119,11 +120,11 @@ head : ∀ {A} → List A → A
 head (x ∷ xs) = x
 -}
 
-{- * xs ‼ n intendes to extract the nth element of xs. 
-     The intention is, for example, 
+{- * xs ‼ n intendes to extract the nth element of xs.
+     The intention is, for example,
          (1 ∷ 2 ∷ 3 ∷ []) ‼ 1  =  2
-    (There is a correesponding definition in Haskell called (!!)). 
-    Try completing the definition. 
+    (There is a correesponding definition in Haskell called (!!)).
+    Try completing the definition.
 
 _‼_ : ∀ {A} → List A → ℕ → A
 xs ‼ n = ?
@@ -148,7 +149,7 @@ ex true = true
 data ⊤ : Set where    -- data Top = TT
    tt : ⊤
 
-data ⊥ : Set where    
+data ⊥ : Set where
 
 IsTrue : Bool → Set
 IsTrue false = ⊥
@@ -171,7 +172,7 @@ headOk xs p = {!!}
 {- * Use headOk to extract the first component of ex1 -}
 
 headex1 : ℕ
-headex1 = {!!}  
+headex1 = {!!}
 
 {- * Can you apply headOk to []? How, or why not? -}
 
@@ -189,7 +190,7 @@ somewhere p [] = false
 somewhere p (x ∷ xs) = p x ∨ somewhere p xs
 
 find1st : ∀{A} → (p : A → Bool) → (xs : List A) →
-           IsTrue (somewhere p xs) → A 
+           IsTrue (somewhere p xs) → A
 find1st p xs q = {!!}
 
 -- Equality for ℕ
@@ -211,7 +212,7 @@ m < n = {!!}
 
 length : ∀ {A} → List A → ℕ
 length [] = zero
-length (x ∷ xs) = suc (length xs) 
+length (x ∷ xs) = suc (length xs)
 
 last : ∀ {A} → (xs : List A) → IsTrue (not (null xs)) → A
 last [] ()
@@ -224,7 +225,7 @@ last (x ∷ (y ∷ xs)) _ = last (y ∷ xs) tt
 index : ∀ {A} → (xs : List A) → (n : ℕ) → IsTrue (n < length xs) → A
 index xs n = {!!}
 
--- Pairs. 
+-- Pairs.
 
 data _×_ (A B : Set) : Set where
   _,_ : A → B → A × B
@@ -242,23 +243,23 @@ ex5 = ((2 , true), false)
      using fst, snd, etc -}
 
 {- Define zip such that, for example,
- 
+
      zip (1 ∷ 2 ∷ 3 ∷ []) (true ∷ false ∷ true ∷ []) =
         (1 , true) ∷ (2 , false) ∷ (3 , true) ∷ []
 
    When the two lists are not equally long, the longer
-   one is truncated. 
+   one is truncated.
 
      zip (1 ∷ 2 ∷ []) (true ∷ false ∷ true ∷ []) =
         (1 , true) ∷ (2 , false) ∷ []
 -}
 zip : ∀ {A B} → (xs : List A) → (ys : List B) → List (A × B)
-zip xs ys = {!!} 
+zip xs ys = {!!}
 
 {- The following function zip= is like zip, but insisting
    that the two arguments must have the same length -}
 
-zip= : ∀ {A B} → (xs : List A) → (ys : List B) 
+zip= : ∀ {A B} → (xs : List A) → (ys : List B)
       → IsTrue (length xs == length ys) → List (A × B)
 zip= xs ys = {!!}
 
@@ -278,7 +279,7 @@ snd' (x , y) = y
 --  ℕorBool false = ℕ
 --  ℕorBool true  = Bool
 -- The type Σ Bool ℕorBool is a pair. The type of its
--- second component is 
+-- second component is
 --   - ℕ if the *value* of its first component is false, or
 --   - Bool if the value of its first component it true.
 
@@ -299,19 +300,19 @@ ex8 = {!!}
 data _∔_ (A B : Set) : Set where
   left  : A → A ∔ B
   right : B → A ∔ B
-    
+
     -- ∔ can be keyed in by \dotplus
 
-ex9 : ∀ {A B} → A ∔ B → B ∔ A 
+ex9 : ∀ {A B} → A ∔ B → B ∔ A
 ex9 = {!!}
 
-ex10 : ∀ {A B C} → A ∔ (B ∔ C) → (A ∔ B) ∔ C 
+ex10 : ∀ {A B C} → A ∔ (B ∔ C) → (A ∔ B) ∔ C
 ex10 = {!!}
 
 ex11 : ∀ {A B C} → A ∔ (B × C) → (A ∔ B) × (A ∔ C)
-ex11 = ?
+ex11 = {!!}
 
-¬ : Set → Set 
+¬ : Set → Set
 ¬ P = P → ⊥
   -- ¬ can be keyed in by \neg
 
