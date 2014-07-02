@@ -108,3 +108,11 @@ interleave :: [a] -> [a] -> [a]
 interleave [] [] = []
 interleave x y = [head x] ++ [head y] ++ interleave (tail x) (tail y)
 
+-- 8
+splitLR :: [Either a b] -> ([a],[b])
+splitLR [] = ([],[])
+splitLR (x : xs) = case x of
+  Left t -> (t: a, b)
+  Right s -> (a, s: b)
+  where (a, b) = splitLR (xs)
+
