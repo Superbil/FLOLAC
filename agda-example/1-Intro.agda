@@ -196,7 +196,10 @@ somewhere p (x ∷ xs) = p x ∨ somewhere p xs
 
 find1st : ∀{A} → (p : A → Bool) → (xs : List A) →
            IsTrue (somewhere p xs) → A
-find1st p xs q = {!!}
+find1st p [] ()
+find1st p (x ∷ xs) q with p x
+... | false = {!!}
+... | true = {!!}
 
 -- Equality for ℕ
 
