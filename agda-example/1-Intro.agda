@@ -176,6 +176,7 @@ headex1 : ℕ
 headex1 = headOk (1 ∷ 2 ∷ 3 ∷ []) tt
 
 {- * Can you apply headOk to []? How, or why not? -}
+-- I can't beacuse [] is not existed
 
 -- a more complex example
 
@@ -184,7 +185,10 @@ true ∨ _ = true
 false ∨ b = b
 
 _∧_ : Bool → Bool → Bool
-b ∧ c = {!!}
+false ∧ false = false
+false ∧ true = false
+true ∧ false = false
+true ∧ true = true
 
 somewhere : ∀ {A} → (A → Bool) → List A → Bool
 somewhere p [] = false
