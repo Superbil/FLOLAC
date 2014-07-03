@@ -28,7 +28,7 @@ data Bool : Set where
 
 not : Bool → Bool
 not false = true
-not true  = false
+not true = false
 
   -- The type could also be written
   --   not : (b : Bool) → Bool
@@ -204,8 +204,10 @@ find1st p (x ∷ xs) q with p x
 -- Equality for ℕ
 
 _==_ : ℕ → ℕ → Bool
-m == zero = {!!}
-m == suc n = {!!}
+zero == zero = true
+suc m == zero = false
+zero == suc n = false
+suc m == suc n = m == n
 
 -- Less-than-or-equal-to for ℕ
 
@@ -245,7 +247,7 @@ fst (x , y) = x
 snd : ∀ {A B} → A × B → B
 snd (x , y) = y
 
-ex5 : {!!}  -- what is the type of ex2?
+ex5 : (ℕ × Bool) × Bool  -- what is the type of ex2?
 ex5 = ((2 , true), false)
 
 {- * Extract the components 2, true, and false in ex2,
@@ -263,14 +265,17 @@ ex5 = ((2 , true), false)
         (1 , true) ∷ (2 , false) ∷ []
 -}
 zip : ∀ {A B} → (xs : List A) → (ys : List B) → List (A × B)
-zip xs ys = {!!}
+zip [] ys = []
+zip (x ∷ xs) [] = []
+zip (x ∷ xs) (x₁ ∷ ys) = zip xs ys
+-- where is x, y ?
 
 {- The following function zip= is like zip, but insisting
    that the two arguments must have the same length -}
 
 zip= : ∀ {A B} → (xs : List A) → (ys : List B)
       → IsTrue (length xs == length ys) → List (A × B)
-zip= xs ys = {!!}
+zip= xs ys = λ _ → []
 
 -- Σ type.
 
