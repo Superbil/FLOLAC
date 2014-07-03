@@ -23,7 +23,7 @@ module 2-DepTypes where
 exII-2 : ∀ {A B : Set} {C : A → B → Set}
       → ((x : A) → (y : B) → C x y)
       → ((y : B) → (x : A) → C x y)
-exII-2 = {!!}
+exII-2 f x y = f y x
 
 data _×_ (A B : Set) : Set where
   _,_ : A → B → A × B
