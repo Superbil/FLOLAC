@@ -198,13 +198,14 @@ find1st : ∀{A} → (p : A → Bool) → (xs : List A) →
            IsTrue (somewhere p xs) → A
 find1st p [] ()
 find1st p (x ∷ xs) q with p x
-... | false = {!!}
-... | true = {!!}
+... | false = find1st p xs q
+... | true = x
 
 -- Equality for ℕ
 
 _==_ : ℕ → ℕ → Bool
-m == n = {!!}
+m == zero = {!!}
+m == suc n = {!!}
 
 -- Less-than-or-equal-to for ℕ
 
