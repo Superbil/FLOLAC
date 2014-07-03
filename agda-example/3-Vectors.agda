@@ -47,6 +47,8 @@ data Vec (A : Set) : ℕ → Set where
  [] : Vec A zero
  _∷_ : {n : ℕ} → A → Vec A n → Vec A (suc n)
 
+-- _∷_ : ∀ {n} → A → Vec A n → Vec A (suc n)
+
  -- While List defines a datatype inductively,
  -- Vec inductively defines a *family* of types
  --   Vec A 0, Vec A 1, Vec A 2 ....
@@ -54,27 +56,29 @@ data Vec (A : Set) : ℕ → Set where
 -- examples
 
 ex0 : Vec ℕ 0
-ex0 = {!!}
+ex0 = []
 
 ex1 : Vec ℕ 1
-ex1 = {!!}
+ex1 = 14 ∷ []
 
 ex2 : Vec ℕ 2
-ex2 = {!!}
+ex2 = 15 ∷ (14 ∷ [])
 
-head : {A : Set}{n : ℕ} → {!!}
-head = {!!}
+head : {A : Set}{n : ℕ} → Vec A (suc n) → A
+head (x ∷ xs) = x
 
-tail : {A : Set}{n : ℕ} → {!!}
-tail = {!!}
+tail : {A : Set}{n : ℕ} → Vec A (suc n) → Vec A n
+tail (x ∷ xs) = xs
 
 zip : ∀{A B n} → Vec A n → Vec B n → Vec (A × B) n
-zip xs ys = {!!}
+zip [] [] = []
+zip (x ∷ xs) (y ∷ ys) = x , y ∷ zip xs ys
 
 zip3 : ∀{A B C n} →
          Vec A n → Vec B n → Vec C n →
            Vec (A × B × C) n
-zip3 xs ys zs = {!!}
+zip3 [] [] [] = []
+zip3 (x ∷ xs) (y ∷ ys) (z ∷ zs) = x , y , z ∷ zip3 xs ys zs
 
 -- concatenating vectors
 
@@ -124,12 +128,15 @@ data Even : ℕ → Set where
   -- Let's try proving that 6 is even,
 
 6-even : Even 6
-6-even = {!!}
+6-even = 2+even (2+even (2+even 0even))
 
   -- and that if n is even, so is 4 + n.
 
 4+even : ∀ n → Even n → Even (4 + n)
-4+even = {!!}
+4+even n p = 2+even (2+even p)
+
+-2even : ∀ n → Even (2 + n) -> Even n
+-2even n (2+even p) = p
 
  {- * The following are some more exercises using ⊥.
       Not mandatory, but try if you want to understand
@@ -207,6 +214,8 @@ double : ∀ {A n} → Vec A n → Vec A (n + n)
 double {A} {zero} [] = []
 double {A} {suc n} (x ∷ xs) with +-suc n n
 ... | p rewrite p = x ∷ x ∷ double xs
+
+-- rewrite a is use a to rewrite all a
 
 -- Of course, given m and n, we can produce a proof
 -- that m + n ≡ n + m. You might not be able to do it now
