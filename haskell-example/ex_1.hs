@@ -106,7 +106,7 @@ double (x : xs) = [x] ++ [x] ++ double xs
 -- 7
 interleave :: [a] -> [a] -> [a]
 interleave [] [] = []
-interleave x y = [head x] ++ [head y] ++ interleave (tail x) (tail y)
+interleave x y = [head x] ++ [head y] ++ interleave (tail y) (tail x)
 
 -- 8
 splitLR :: [Either a b] -> ([a],[b])
