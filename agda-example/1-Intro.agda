@@ -267,7 +267,7 @@ ex5 = ((2 , true), false)
 zip : ∀ {A B} → (xs : List A) → (ys : List B) → List (A × B)
 zip [] ys = []
 zip (x ∷ xs) [] = []
-zip (x ∷ xs) (x₁ ∷ ys) = zip xs ys
+zip (x ∷ xs) (y₁ ∷ ys) = {!(x , y) ∷ zip xs ys !}
 -- where is x, y ?
 
 {- The following function zip= is like zip, but insisting
