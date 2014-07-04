@@ -217,7 +217,8 @@ suc m ≤ zero = false
 suc m ≤ suc n = m ≤ n
 
 _<_ : ℕ → ℕ → Bool
-m < n = {!!}
+zero < n = true
+suc m < n = {!!}
 
 -- lengths of lists
 

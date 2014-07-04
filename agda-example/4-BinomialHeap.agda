@@ -39,8 +39,21 @@ data ℕ : Set where
 -- {-# BUILTIN ZERO zero #-}
 -- {-# BUILTIN SUC  suc  #-}
 
+_+_ : ℕ → ℕ → ℕ
+zero + x = x
+suc x + y = suc (x + y)
+
+infixr 5 _+_
+
+2* : ℕ → ℕ
+2* zero = zero
+2* (suc x) = {!suc (2* x)!}
+
+-- 2^0 2^1 2^2
 bin→ℕ : Bin → ℕ
-bin→ℕ = {!!}
+bin→ℕ nul = zero
+bin→ℕ (zero∷ b) = 2* (bin→ℕ b)
+bin→ℕ (one∷ b) = suc (2* (bin→ℕ b))
   -- if you need 2* or addition, etc,
   -- define your own!
 
