@@ -54,6 +54,8 @@ data ⊤ : Set where
 data _×_ (A B : Set) : Set where
   _,_ : A → B → A × B
 
+infixr 5 _×_ _,_
+
  {- Given X : ℕ → Set and n : ℕ,
     X ^ n is a sequence of n items,
       X n , X (n-1) , ... , X 1.
@@ -70,7 +72,9 @@ data Vec (A : Set) : ℕ → Set where
  [] : Vec A zero
  _∷_ : {n : ℕ} → A → Vec A n → Vec A (suc n)
 
-ex1 : Vec Bool 3
+infixr 5 _∷_
+
+ex1 : Vec Bool ^ 3
 ex1 = {!!}
 
   -- Binomial Tree.
