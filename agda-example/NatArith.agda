@@ -27,7 +27,7 @@ pred = {!!}
 infixr 5 _+_
 
 _+_ : ℕ → ℕ → ℕ
-_+_ = {!!}
+_+_ = {!ind (λ _ → ℕ → ℕ) → ℕ !}
 
 infixr 6 _*_
 
@@ -119,11 +119,12 @@ x ∎ = refl
 
 --------
 -- natural numbers with addition and multiplication form a commutative semi-ring
-
+-- ∎ is \qed
 -- addition is associative
 
 add-assoc : (x y z : ℕ) → (x + y) + z ≡ x + (y + z)
-add-assoc = {!!}
+add-assoc zero y z = {!!}
+add-assoc (suc x) y z = {!!}
 
 -- addition is commutative
 

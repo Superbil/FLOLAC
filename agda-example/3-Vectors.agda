@@ -87,7 +87,8 @@ zero + n = n
 (suc m) + n = suc (m + n)
 
 _++_ : ∀ {A m n} → Vec A m → Vec A n → Vec A (m + n)
-xs ++ ys = {!!}
+[] ++ ys = ys
+(x ∷ xs) ++ ys = x ∷ xs ++ ys
 
   -- What is it about _+_ which makes _++_ typecheck?
 
